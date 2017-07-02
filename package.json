@@ -1,0 +1,52 @@
+{
+  "name": "launchem",
+  "description": "Launch'em scripts! JavaScript Browser and Process launcher.",
+  "keywords": [
+    "javascript",
+    "browser",
+    "process",
+    "launcher"
+  ],
+  "version": "0.0.0",
+  "author": "Testem Contributors",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/testem/launchem.git"
+  },
+  "bugs": {
+    "url": "http://github.com/testem/launchem/issues"
+  },
+  "engines": {
+    "node": ">= 0.8.0"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "bluebird": "^3.5.0",
+    "dirty-chai": "^2.0.0",
+    "lodash.clonedeep": "^4.5.0",
+    "lodash.find": "^4.6.0",
+    "npmlog": "^4.1.2",
+    "sinon": "^2.3.6"
+  },
+  "devDependencies": {
+    "chai": "^4.0.2",
+    "chai-files": "^1.4.0",
+    "chai-shallow-deep-equal": "^1.4.6",
+    "eslint": "^4.1.1",
+    "eslint-plugin-chai-expect": "^1.1.1",
+    "eslint-plugin-mocha": "^4.11.0",
+    "mocha": "^3.4.2",
+    "sinon-chai": "^2.11.0",
+    "tmp": "0.0.31"
+  },
+  "files": [
+    "lib",
+    "README.md",
+    "package.json"
+  ],
+  "scripts": {
+    "lint": "eslint .",
+    "test": "mocha --opts mocha.opts tests/*_tests.js"
+  },
+  "main": "./index.js"
+}
