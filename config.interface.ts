@@ -5,6 +5,11 @@
 interface LaunchemConfig {
   platform: string;
 
+  cwd: string;
+  url: string;
+  port: string;
+  user_data_dir: string
+
   homeDir: string;
   mode: string;
   browser_args: object;
