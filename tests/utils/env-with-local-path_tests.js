@@ -4,7 +4,7 @@ var path = require('path');
 
 var expect = require('chai').expect;
 
-var envWithLocalPath = require('../lib/env-with-local-path');
+var envWithLocalPath = require('../../lib/utils/env-with-local-path');
 
 describe('envWithLocalPath', function() {
   it('returns the process env with the local node module path added', function() {

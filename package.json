@@ -46,7 +46,7 @@
   ],
   "scripts": {
     "lint": "eslint .",
-    "test": "mocha --opts mocha.opts tests/*_tests.js"
+    "test": "mocha --opts mocha.opts tests/*_tests.js tests/**/*_tests.js"
   },
   "main": "./index.js"
 }

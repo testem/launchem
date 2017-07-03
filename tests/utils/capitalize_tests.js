@@ -1,6 +1,6 @@
 'use strict';
 
-var capitalize = require('../lib/capitalize');
+var capitalize = require('../../lib/utils/capitalize');
 var expect = require('chai').expect;
 
 describe('capitalize', function() {

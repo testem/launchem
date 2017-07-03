@@ -7,8 +7,8 @@ var EventEmitter = require('events').EventEmitter;
 var expect = require('chai').expect;
 var sinon = require('sinon');
 
-var fileutils = require('../lib/fileutils');
-var addToPATH = require('../lib/add-to-PATH');
+var fileutils = require('../../lib/utils/fileutils');
+var addToPATH = require('../../lib/utils/add-to-PATH');
 
 describe('fileutils', function() {
   var sandbox;
