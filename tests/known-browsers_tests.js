@@ -14,24 +14,14 @@ var file = require('chai-files').file;
 var knownBrowsers = require('../lib/known-browsers');
 
 function addBrowserArgsToConfig(config, browserName) {
-  config.get = function(name) {
-    var args = {};
-
-    if (name === 'browser_args') {
-      args[browserName] = '--testem';
-      return args;
-    }
-  };
+  var args = {};
+  args[browserName] = '--testem';
+  config.browser_args = args;
 }
 
 function createConfig() {
   return {
-    getHomeDir: function() {
-      return 'home/dir';
-    },
-    get: function() {
-      return;
-    }
+    homeDir: 'home/dir'
   };
 }
 
@@ -74,7 +64,7 @@ describe('knownBrowsers', function() {
           config = createConfig();
         }
 
-        browsers = knownBrowsers('any', config);
+        browsers = knownBrowsers(config);
         firefox = findBrowser(browsers, 'Firefox');
       }
 
@@ -106,11 +96,7 @@ describe('knownBrowsers', function() {
       it('allows to provide a custom user.js', function(done) {
         var customPrefsJSPath = path.join(__dirname, './fixtures/firefox/custom_user.js');
 
-        config.get = function(name) {
-          if (name === 'firefox_user_js') {
-            return customPrefsJSPath;
-          }
-        };
+        config.firefox_user_js = customPrefsJSPath;
 
         firefox.setup.call(launcher, config, function(err) {
           expect(err).to.be.null();
@@ -149,7 +135,7 @@ describe('knownBrowsers', function() {
           config = createConfig();
         }
 
-        browsers = knownBrowsers('any', config);
+        browsers = knownBrowsers(config);
         chrome = findBrowser(browsers, 'Chrome');
       }
 
@@ -221,7 +207,7 @@ describe('knownBrowsers', function() {
           config = createConfig();
         }
 
-        browsers = knownBrowsers('any', config);
+        browsers = knownBrowsers(config);
         safari = findBrowser(browsers, 'Safari');
       }
 
@@ -277,7 +263,7 @@ describe('knownBrowsers', function() {
           config = createConfig();
         }
 
-        browsers = knownBrowsers('any', config);
+        browsers = knownBrowsers(config);
         safariTP = findBrowser(browsers, 'Safari Technology Preview');
       }
 
@@ -333,7 +319,7 @@ describe('knownBrowsers', function() {
           config = createConfig();
         }
 
-        browsers = knownBrowsers('any', config);
+        browsers = knownBrowsers(config);
         opera = findBrowser(browsers, 'Opera');
       }
 
@@ -380,7 +366,7 @@ describe('knownBrowsers', function() {
           config = createConfig();
         }
 
-        browsers = knownBrowsers('any', config);
+        browsers = knownBrowsers(config);
         phantomJS = findBrowser(browsers, 'PhantomJS');
       }
 
@@ -400,11 +386,7 @@ describe('knownBrowsers', function() {
       });
 
       it('constructs correct args with phantomjs_debug_port', function() {
-        config.get = function(name) {
-          if (name === 'phantomjs_debug_port') {
-            return '1234';
-          }
-        };
+        config.phantomjs_debug_port = '1234';
 
         expect(phantomJS.args.call(launcher, config, url)).to.deep.eq([
           '--remote-debugger-port=1234',
@@ -415,11 +397,7 @@ describe('knownBrowsers', function() {
       });
 
       it('constructs correct args with phantomjs_args', function() {
-        config.get = function(name) {
-          if (name === 'phantomjs_args') {
-            return ['arg1', 'arg2'];
-          }
-        };
+        config.phantomjs_args = ['arg1', 'arg2'];
 
         expect(phantomJS.args.call(launcher, config, url)).to.deep.eq([
           'arg1', 'arg2', scriptPath, url
@@ -443,14 +421,9 @@ describe('knownBrowsers', function() {
         });
 
         it('constructs correct args with phantomjs_debug_port and browser_args', function() {
-          config.get = function(name) {
-            if (name === 'phantomjs_debug_port') {
-              return '1234';
-            } else if (name === 'browser_args') {
-              return {
-                PhantomJS: '--testem'
-              };
-            }
+          config.phantomjs_debug_port = '1234';
+          config.browser_args = {
+            PhantomJS: '--testem'
           };
 
           expect(phantomJS.args.call(launcher, config, url)).to.deep.eq([
@@ -463,14 +436,9 @@ describe('knownBrowsers', function() {
         });
 
         it('constructs correct args with phantomjs_args and browser_args', function() {
-          config.get = function(name) {
-            if (name === 'phantomjs_args') {
-              return ['arg1', 'arg2'];
-            } else if (name === 'browser_args') {
-              return {
-                PhantomJS: '--testem'
-              };
-            }
+          config.phantomjs_args = ['arg1', 'arg2'];
+          config.browser_args = {
+            PhantomJS: '--testem'
           };
 
           expect(phantomJS.args.call(launcher, config, url)).to.deep.eq([
@@ -481,11 +449,7 @@ describe('knownBrowsers', function() {
         it('constructs correct args with custom launch script', function() {
           var customScriptPath = './custom_phantom.js';
 
-          config.get = function(name) {
-            if (name === 'phantomjs_launch_script') {
-              return customScriptPath;
-            }
-          };
+          config.phantomjs_launch_script = customScriptPath;
 
           expect(phantomJS.args.call(launcher, config, url)).to.deep.eq([
             '--testem', customScriptPath, url
@@ -507,7 +471,9 @@ describe('knownBrowsers', function() {
           config = createConfig();
         }
 
-        browsers = knownBrowsers('win32', config);
+        config.platform = 'win32';
+
+        browsers = knownBrowsers(config);
         internetExplorer = findBrowser(browsers, 'IE');
       }
 

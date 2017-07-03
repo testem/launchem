@@ -115,7 +115,7 @@ describe('browserArgs', function() {
 
         knownBrowsers = createKnownBrowsers();
 
-        config.appMode = 'dev';
+        config.mode = 'dev';
         config.browser_args = {
           chrome: {
             mode: 'dev',
