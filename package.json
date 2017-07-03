@@ -27,7 +27,9 @@
     "lodash.assignin": "^4.2.0",
     "lodash.clonedeep": "^4.5.0",
     "lodash.find": "^4.6.0",
+    "mkdirp": "^0.5.1",
     "npmlog": "^4.1.2",
+    "rimraf": "^2.6.1",
     "sinon": "^2.3.6",
     "spawn-args": "^0.2.0"
   },
